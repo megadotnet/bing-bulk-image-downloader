@@ -91,19 +91,19 @@ func TestWorker(t *testing.T) {
 		case "/image.jpg":
 			w.Header().Set("Content-Type", "image/jpeg")
 			w.WriteHeader(http.StatusOK)
-			w.Write([]byte("fake image data"))
+			_, _ = w.Write([]byte("fake image data"))
 		case "/image.gif":
 			w.Header().Set("Content-Type", "image/gif")
 			w.WriteHeader(http.StatusOK)
-			w.Write([]byte("fake gif data"))
+			_, _ = w.Write([]byte("fake gif data"))
 		case "/image.png":
 			w.Header().Set("Content-Type", "image/png")
 			w.WriteHeader(http.StatusOK)
-			w.Write([]byte("fake png data"))
+			_, _ = w.Write([]byte("fake png data"))
 		case "/not_an_image":
 			w.Header().Set("Content-Type", "text/plain")
 			w.WriteHeader(http.StatusOK)
-			w.Write([]byte("this is not an image"))
+			_, _ = w.Write([]byte("this is not an image"))
 		case "/404":
 			w.WriteHeader(http.StatusNotFound)
 		default:
@@ -226,7 +226,7 @@ func TestWorker_Errors(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "image/jpeg")
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("fake image data"))
+		_, _ = w.Write([]byte("fake image data"))
 	}))
 	defer server.Close()
 
