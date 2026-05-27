@@ -123,14 +123,27 @@ func safesearch_s(b bool) string {
 	return "off"
 }
 
+var (
+	Version   = "dev"
+	Commit    = "none"
+	BuildTime = "unknown"
+)
+
 func main() {
 	var count int64
 	var outdir string
 	var safesearch bool
+	var showVersion bool
 	flag.Int64Var(&count, "n", 100, "count")
 	flag.StringVar(&outdir, "o", ".", "output directory")
 	flag.BoolVar(&safesearch, "s", true, "safe search")
+	flag.BoolVar(&showVersion, "v", false, "show version")
 	flag.Parse()
+
+	if showVersion {
+		fmt.Printf("Version: %s\nCommit: %s\nBuildTime: %s\n", Version, Commit, BuildTime)
+		os.Exit(0)
+	}
 
 	if flag.NArg() == 0 {
 		flag.Usage()
