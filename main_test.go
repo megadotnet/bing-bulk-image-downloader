@@ -226,7 +226,7 @@ func TestWorker_Errors(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "image/jpeg")
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("fake image data"))
+		_, _ = w.Write([]byte("fake image data"))
 	}))
 	defer server.Close()
 
